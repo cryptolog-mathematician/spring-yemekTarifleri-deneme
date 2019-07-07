@@ -20,7 +20,7 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
     }
 
     @Override
-    public Set<UnitOfMeasure> findByAll() {
+    public Set<UnitOfMeasure> findAll() {
         Set<UnitOfMeasure> unitOfMeasures = new HashSet<>();
         unitOfMeasureRepository.findAll().forEach(unitOfMeasures :: add);
         return null;

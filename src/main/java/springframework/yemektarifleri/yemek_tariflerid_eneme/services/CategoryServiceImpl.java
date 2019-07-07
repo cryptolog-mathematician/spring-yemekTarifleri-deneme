@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Set<Category> findByAll() {
+    public Set<Category> findAll() {
         Set<Category> categories = new HashSet<>();
         categoryRepository.findAll().forEach(categories::add);
         return categories;
