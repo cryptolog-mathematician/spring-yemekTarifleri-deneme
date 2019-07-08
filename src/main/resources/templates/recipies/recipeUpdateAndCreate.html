@@ -9,7 +9,7 @@
     <h3>Recipe</h3>
 
     <div>
-        <form action="#" th:action="@{/createAndUpdate}" th:object="${recipe}" method="post">
+        <form  th:object="${recipe}" th:action="@{/recipe/}" method="post">
             <div>
                 <input type="text" th:field="*{description}" />
                 <input type="text" th:field="*{prepTime}" />
@@ -20,10 +20,7 @@
                 <!-- img note and ingredients should be added -->
             </div>
             <div>
-                <button
-                        th:with="text=${recipe['new']} ? 'Add Recipe' : 'Update Recipe'"
-                        type="submit" th:text="${text}">
-                    Add Owner</button>
+                <button type="submit">Submit</button>
             </div>
         </form>
     </div>

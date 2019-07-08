@@ -3,11 +3,7 @@ package springframework.yemektarifleri.yemek_tariflerid_eneme.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeService;
 
@@ -22,27 +18,45 @@ public class recipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping("/recipes")
-    public  String getAllRecipe(Model model){
+    @RequestMapping({"","/","/recipes"})
+    public String getAllRecipe(Model model){
+        log.debug("Getting recipeHome page");
+
         model.addAttribute("recipes", recipeService.findAll());
         return "recipeHome";
     }
 
-    @GetMapping("/recipes/{recipeId}/edit")
-    public String initUpdateRecipeForm(@PathVariable("recipeId") Long recipeId, Model model) {
-        Recipe recipe = this.recipeService.findById(recipeId);
+    @GetMapping("/recipe/{id}")
+    public String getRecipeDetail(@PathVariable String id, Model model) {
+        Recipe recipe = this.recipeService.findById(new Long(id));
         model.addAttribute(recipe);
-        return "recipeUpdateAndCreate";
+        return "recipeDetail";
     }
 
-    @PostMapping("/recipes/{recipeId}/edit")
-    public String processUpdateRecipeForm(Recipe recipe, BindingResult result, @PathVariable("recipeId") Long recipeId) {
-        if (result.hasErrors()) {
-            return "recipeUpdateAndCreate";
-        } else {
-            this.recipeService.save(recipe);
-            return "/recipes/{recipeId}";
-        }
+    @GetMapping("recipe/new")
+    public String newRecipe(Model model){
+        model.addAttribute("recipe", new Recipe());
+
+        return "recipe/recipeUpdateAndCreate";
+    }
+
+    @GetMapping("recipe/{id}/edit")
+    public String updateRecipe(@PathVariable String id, Model model){
+        model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
+        return  "recipe/recipeUpdateAndCreate";
+    }
+
+    @PostMapping("recipe")
+    public String saveOrUpdate(@ModelAttribute Recipe recipe){
+        Recipe savedRecipe = recipeService.save(recipe);
+
+        return "redirect:/recipe/" + savedRecipe.getId() + "/recipeDetail";
+    }
+
+    @GetMapping("recipe/{id}/delete")
+    public String deleteById(@PathVariable String id){
+        recipeService.deletById(Long.valueOf(id));
+        return "redirect:/";
     }
 }
 

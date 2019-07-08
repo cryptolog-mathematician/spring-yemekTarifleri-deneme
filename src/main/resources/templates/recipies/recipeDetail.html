@@ -8,15 +8,17 @@
     <h2>Recipe Information</h2>
 
     <div>
+        <!--/*@thymesVar id="recipe" type="springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe"*/-->
         <table th:object="${recipe}">
             <tr>
                 <th>Description</th>
-                <td><b th:text="*{description}"></b></td>
+                <td>
+                <b th:text="${recipe.description}"></b></td>
             </tr>
             <tr>
                 <th>Category</th>
             <tr th:each = "category : ${recipe.categories}">
-                <td th:text="${category.descriotion}"></td>
+                <td th:text="${category.description}"></td>
             </tr>
             </tr>
             <tr>
@@ -45,7 +47,7 @@
             </tr>
         </table>
 
-        <a th:href="@{{id}/edit(id=${recipe.id})}" >Edit Recipe</a>
+        <a th:href="@{{id}/edit(id=${recipe.id})}" >Update Recipe</a>
     </div>
 </body>
 </html>
