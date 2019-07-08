@@ -1,5 +1,6 @@
 package springframework.yemektarifleri.yemek_tariflerid_eneme.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeService;
 
+@Slf4j
 @Controller
 public class recipeController {
 
@@ -21,20 +23,20 @@ public class recipeController {
     }
 
     @RequestMapping("/recipes")
-    public  String findAllRecipe(Model model){
+    public  String getAllRecipe(Model model){
         model.addAttribute("recipes", recipeService.findAll());
         return "recipeHome";
     }
 
     @GetMapping("/recipes/{recipeId}/edit")
-    public String initUpdateOwnerForm(@PathVariable("recipeId") Long recipeId, Model model) {
+    public String initUpdateRecipeForm(@PathVariable("recipeId") Long recipeId, Model model) {
         Recipe recipe = this.recipeService.findById(recipeId);
         model.addAttribute(recipe);
         return "recipeUpdateAndCreate";
     }
 
     @PostMapping("/recipes/{recipeId}/edit")
-    public String processUpdateOwnerForm(Recipe recipe, BindingResult result, @PathVariable("recipeId") Long recipeId) {
+    public String processUpdateRecipeForm(Recipe recipe, BindingResult result, @PathVariable("recipeId") Long recipeId) {
         if (result.hasErrors()) {
             return "recipeUpdateAndCreate";
         } else {
