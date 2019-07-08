@@ -8,19 +8,79 @@
     <h2 th:text="'List of Recipies'">List of Recipies</h2>
     <table>
         <thead>
-        <th style="width: 150px;">Id</th>
-        <th style="width: 150px;">Description</th>
-        <th style="width: 150px;">Preparation Time</th>
-        <th style="width: 150px;">Cooking Time</th>
+            <th style="width: 150px;">Id</th>
+            <th style="width: 150px;">Description</th>
+            <th style="width: 150px;">Image</th>
         </thead>
         <tbody>
-        <tr th:each = "recipe : ${recipes}">
-            <td th:text="*{id}">1</td>
-            <td th:text="*{description}">description</td>
-            <td th:text="${(recipe?.prepTime)}">prep time</td>
-            <td th:text="${(recipe?.cookTime)}">cook time</td>
-        </tr>
+            <tr th:each = "recipe : ${recipes}">
+                <td th:text="*{id}">Id</td>
+                <td>
+                    <a th:href="@{/recipies/__${recipe.id}__}" th:text="*{description}"/></a>
+                </td>
+                <td th:text="${(recipe?.image)}">Image</td>
+            </tr>
         </tbody>
     </table>
+
+
+    <!-- Recipe detail yukaridan tiklayinca bu acilacak!!! Bunun icin yeni bir html olustur ve controllerda kodlari yaz!!!
+        <h2>Recipe Information</h2>
+
+        <table th:object="${recipe}">
+            <tr>
+                <th>Description</th>
+                <td><b th:text="*{description}"></b></td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <tr th:each = "category : ${recipe.categories}">
+                    <td th:text="${category.descriotion}"></td>
+                </tr>
+            </tr>
+            <tr>
+                <th>Preparation Time</th>
+                <td th:text="*{prepTime}" /></td>
+            </tr>
+            <tr>
+                <th>Cooking Time</th>
+                <td th:text="*{cookTime}" /></td>
+            </tr>
+            <tr>
+                <th>Servings</th>
+                <td th:text="*{servings}" /></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td th:text="*{source}" /></td>
+            </tr>
+            <tr>
+                <th>Directions</th>
+                <td th:text="*{directions}" /></td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td th:text="*{imege}" /></td>
+            </tr>
+        </table>
+
+    <a th:href="@{{id}/edit(id=${recipe.id})}" >Edit Recipe</a>
+-->
+<!-- Bunun icin de yeni bir html olustur!!! buna nassil yon verecegini de ogrennnnnnnn
+    <h3>Recipe</h3>
+    <form action="#" th:action="@{/createAndUpdate}" th:object="${recipe}" method="post">
+        <div>
+            <input type="text" th:field="*{description}" />
+            <input type="text" th:field="*{prepTime}" />
+            <input type="text" th:field="*{cookTime}" />
+        </div>
+        <div>
+            <button
+                    th:with="text=${recipe['new']} ? 'Add Recipe' : 'Update Recipe'"
+                    type="submit" th:text="${text}">
+                Add Owner</button>
+        </div>
+    </form>
+-->
 </body>
 </html>

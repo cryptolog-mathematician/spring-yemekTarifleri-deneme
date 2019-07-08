@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Update and Create</title>
+</head>
+<body>
+
+    <h3>Recipe</h3>
+
+    <div>
+        <form action="#" th:action="@{/createAndUpdate}" th:object="${recipe}" method="post">
+            <div>
+                <input type="text" th:field="*{description}" />
+                <input type="text" th:field="*{prepTime}" />
+                <input type="text" th:field="*{cookTime}" />
+                <input type="text" th:field="*{servings}" />
+                <input type="text" th:field="*{source}" />
+                <input type="text" th:field="*{directions}" />
+                <!-- img note and ingredients should be added -->
+            </div>
+            <div>
+                <button
+                        th:with="text=${recipe['new']} ? 'Add Recipe' : 'Update Recipe'"
+                        type="submit" th:text="${text}">
+                    Add Owner</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

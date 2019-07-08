@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Detail</title>
+</head>
+<body>
+    <h2>Recipe Information</h2>
+
+    <div>
+        <table th:object="${recipe}">
+            <tr>
+                <th>Description</th>
+                <td><b th:text="*{description}"></b></td>
+            </tr>
+            <tr>
+                <th>Category</th>
+            <tr th:each = "category : ${recipe.categories}">
+                <td th:text="${category.descriotion}"></td>
+            </tr>
+            </tr>
+            <tr>
+                <th>Preparation Time</th>
+                <td th:text="*{prepTime}" /></td>
+            </tr>
+            <tr>
+                <th>Cooking Time</th>
+                <td th:text="*{cookTime}" /></td>
+            </tr>
+            <tr>
+                <th>Servings</th>
+                <td th:text="*{servings}" /></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td th:text="*{source}" /></td>
+            </tr>
+            <tr>
+                <th>Directions</th>
+                <td th:text="*{directions}" /></td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td th:text="*{imege}" /></td>
+            </tr>
+        </table>
+
+        <a th:href="@{{id}/edit(id=${recipe.id})}" >Edit Recipe</a>
+    </div>
+</body>
+</html>
