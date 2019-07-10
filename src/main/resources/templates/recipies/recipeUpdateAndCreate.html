@@ -10,16 +10,32 @@
     <!--/*@thymesVar id="recipe" type="springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe"*/-->
     <div>
         <form  th:object="${recipe}" th:action="@{/recipe/}" method="post">
+            <div th:if="${#fields.hasErrors('*')}">
+                <p>Please Correct Errors Below</p>
+            </div>
+
             <div>
-                <ul th:if="${#fields.hasAnyErrors()}">
-                    <li th:each = "error : ${#fields.errors()}" th:text="error"></li>
-                </ul>
                 <input type="text" th:field="*{description}" />
+                    <ul>
+                        <li th:each="err : ${#fields.errors('description')}" th:text="${err}"/>
+                    </ul>
                 <input type="text" th:field="*{prepTime}" />
+                    <ul>
+                        <li th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"/>
+                    </ul>
                 <input type="text" th:field="*{cookTime}" />
+                    <ul>
+                        <li th:each="err : ${#fields.errors('cookTime')}" th:text="${err}"/>
+                    </ul>
                 <input type="text" th:field="*{servings}" />
+                    <ul>
+                        <li th:each="err : ${#fields.errors('servings')}" th:text="${err}"/>
+                    </ul>
                 <input type="text" th:field="*{source}" />
                 <input type="text" th:field="*{directions}" />
+                    <ul>
+                        <li th:each="err : ${#fields.errors('directions')}" th:text="${err}"/>
+                    </ul>
                 <!-- img note and ingredients should be added -->
             </div>
             <div>
