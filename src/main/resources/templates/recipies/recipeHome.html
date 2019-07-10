@@ -20,12 +20,15 @@
         <tr th:each="recipe : ${recipes}">
             <td th:text="${recipe.id}">Id</td>
             <td th:text="${recipe.description}">description</td>
-            <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} }">View</a></td>
+            <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/recipeDetail' }">View</a></td>
             <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/edit'}">Update</a></td>
             <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
         </tr>
         </tbody>
     </table>
+    <div>
+        <a href="#" th:href="@{'/recipe/new'}">Add new Recipe</a>
+    </div>
 
 
     <!-- Recipe detail yukaridan tiklayinca bu acilacak!!! Bunun icin yeni bir html olustur ve controllerda kodlari yaz!!!

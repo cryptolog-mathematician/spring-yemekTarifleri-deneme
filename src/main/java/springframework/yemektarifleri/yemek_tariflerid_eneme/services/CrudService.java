@@ -1,5 +1,6 @@
 package springframework.yemektarifleri.yemek_tariflerid_eneme.services;
 
+import java.util.List;
 import java.util.Set;
 
 public interface CrudService<T, ID> {

@@ -3,6 +3,10 @@ package springframework.yemektarifleri.yemek_tariflerid_eneme.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -12,15 +16,28 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(min = 4, max = 100)
     private String description;
+
+    @Min(5)
+    @Max(120)
     private String prepTime;
+
+    @Min(5)
+    @Max(360)
     private String cookTime;
+
+    @Min(1)
+    @Max(40)
     private String servings;
     private String source;
+
+    @NotBlank
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingradients> ingradients;
+    private Set<Ingradient> ingradients;
 
     @Lob
     private Byte[] imege;
@@ -109,14 +126,23 @@ public class Recipe {
     }
 
     public void setNotes(Notes notes) {
-        this.notes = notes;
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
-    public Set<Ingradients> getIngradients() {
+    public Set<Ingradient> getIngradients() {
         return ingradients;
     }
 
-    public void setIngradients(Set<Ingradients> ingradients) {
+    public void setIngradients(Set<Ingradient> ingradients) {
         this.ingradients = ingradients;
+    }
+
+    public Recipe addIngradient(Ingradient ingradient) {
+        this.ingradients.add(ingradient);
+        ingradient.setRecipe(this);
+        return this;
     }
 }

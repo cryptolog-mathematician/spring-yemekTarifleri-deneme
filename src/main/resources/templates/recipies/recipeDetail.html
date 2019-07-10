@@ -47,7 +47,7 @@
             </tr>
         </table>
 
-        <a th:href="@{{id}/edit(id=${recipe.id})}" >Update Recipe</a>
+        <a th:href="@{/recipe/{id}/edit(id=${recipe.id})}" >Update Recipe</a>
     </div>
 </body>
 </html>

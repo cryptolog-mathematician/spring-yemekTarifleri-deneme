@@ -11,6 +11,9 @@
     <div>
         <form  th:object="${recipe}" th:action="@{/recipe/}" method="post">
             <div>
+                <ul th:if="${#fields.hasAnyErrors()}">
+                    <li th:each = "error : ${#fields.errors()}" th:text="error"></li>
+                </ul>
                 <input type="text" th:field="*{description}" />
                 <input type="text" th:field="*{prepTime}" />
                 <input type="text" th:field="*{cookTime}" />

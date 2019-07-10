@@ -4,6 +4,7 @@ import springframework.yemektarifleri.yemek_tariflerid_eneme.models.UnitOfMeasur
 import springframework.yemektarifleri.yemek_tariflerid_eneme.repositories.UnitOfMeasureRepository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {

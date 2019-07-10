@@ -1,16 +1,18 @@
 package springframework.yemektarifleri.yemek_tariflerid_eneme.controllers;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.exceptions.NotFoundException;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeService;
 
-@Slf4j
+import javax.validation.Valid;
+
+
 @Controller
 public class recipeController {
 
@@ -21,15 +23,7 @@ public class recipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({"/recipes"})
-    public String getAllRecipe(Model model){
-        log.debug("Getting recipeHome page");
-
-        model.addAttribute("recipes", recipeService.findAll());
-        return "recipeHome";
-    }
-
-    @GetMapping("/recipe/{id}")
+    @GetMapping("/recipe/{id}/recipeDetail")
     public String getRecipeDetail(@PathVariable String id, Model model) {
         Recipe recipe = this.recipeService.findById(new Long(id));
         model.addAttribute(recipe);
@@ -40,17 +34,22 @@ public class recipeController {
     public String newRecipe(Model model){
         model.addAttribute("recipe", new Recipe());
 
-        return "recipe/recipeUpdateAndCreate";
+        return "recipeUpdateAndCreate";
     }
 
     @GetMapping("recipe/{id}/edit")
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
-        return  "recipe/recipeUpdateAndCreate";
+        return  "recipeUpdateAndCreate";
     }
 
     @PostMapping("recipe")
-    public String saveOrUpdate(@ModelAttribute Recipe recipe){
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult result){
+
+        if (result.hasErrors()){
+            return "recipeUpdateAndCreate";
+        }
+
         Recipe savedRecipe = recipeService.save(recipe);
 
         return "redirect:/recipe/" + savedRecipe.getId() + "/recipeDetail";
@@ -72,5 +71,17 @@ public class recipeController {
         modelAndView.addObject("exception", exception);
         return modelAndView;
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormatFound(Exception exception){
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("400error");
+        modelAndView.addObject("exception", exception);
+        return modelAndView;
+    }
+
 }
 
