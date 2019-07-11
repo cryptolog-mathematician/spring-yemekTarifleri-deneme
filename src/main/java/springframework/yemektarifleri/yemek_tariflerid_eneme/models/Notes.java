@@ -17,7 +17,7 @@ public class Notes {
     @OneToOne
     private Recipe recipe;
 
-    @Lob
+    //@Lob
     private String recipeNotes;
 
 

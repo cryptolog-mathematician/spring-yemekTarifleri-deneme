@@ -27,27 +27,27 @@ public class recipeController {
     public String getRecipeDetail(@PathVariable String id, Model model) {
         Recipe recipe = this.recipeService.findById(new Long(id));
         model.addAttribute(recipe);
-        return "recipeDetail";
+        return "recipies/recipeDetail";
     }
 
     @GetMapping("recipe/new")
     public String newRecipe(Model model){
         model.addAttribute("recipe", new Recipe());
 
-        return "recipeUpdateAndCreate";
+        return "recipies/recipeUpdateAndCreate";
     }
 
     @GetMapping("recipe/{id}/edit")
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
-        return  "recipeUpdateAndCreate";
+        return  "recipies/recipeUpdateAndCreate";
     }
 
     @PostMapping("recipe")
     public String saveOrUpdate(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult result){
 
         if (result.hasErrors()){
-            return "recipeUpdateAndCreate";
+            return "recipies/recipeUpdateAndCreate";
         }
 
         Recipe savedRecipe = recipeService.save(recipe);

@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -25,20 +23,21 @@ public class Recipe {
     @Size(min = 4, max = 100)
     private String description;
 
-    @Min(5)
-    @Max(120)
+    @Size(min = 4, max = 120)
     private String prepTime;
 
-    @Min(5)
-    @Max(360)
+    //@Min(5)
+    //@Max(360)
+    @Size(min = 5, max = 360)
     private String cookTime;
 
-    @Min(1)
-    @Max(40)
+    //@Min(1)
+    //@Max(40)
+    @Size(min = 1, max = 40)
     private String servings;
     private String source;
 
-    @NotBlank
+    //@NotBlank
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")

@@ -9,7 +9,7 @@
     <h3>Recipe</h3>
     <!--/*@thymesVar id="recipe" type="springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe"*/-->
     <div>
-        <form  th:object="${recipe}" th:action="@{/recipe/}" method="post">
+        <form  action="#" th:object="${recipe}" th:action="@{/recipe/}" method="post">
             <div th:if="${#fields.hasErrors('*')}">
                 <p>Please Correct Errors Below</p>
             </div>

@@ -6,8 +6,6 @@
 </head>
 <body>
     <h2 th:text="'List of Recipies'">List of Recipes</h2>
-    <!--/*@thymesVar id="recipes" type="java.util.List"*/-->
-    <!--/*@thymesVar id="recipe" type="springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe"*/-->
     <table>
         <thead>
             <th style="width: 150px;">Id</th>
@@ -17,6 +15,8 @@
             <th style="width: 150px;">Delete</th>
         </thead>
         <tbody>
+        <!--/*@thymesVar id="recipes" type="java.util.List"*/-->
+        <!--/*@thymesVar id="recipe" type="springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe"*/-->
         <tr th:each="recipe : ${recipes}">
             <td th:text="${recipe.id}">Id</td>
             <td th:text="${recipe.description}">description</td>
