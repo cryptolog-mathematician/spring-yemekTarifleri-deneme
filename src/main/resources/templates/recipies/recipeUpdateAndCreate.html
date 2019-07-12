@@ -15,24 +15,27 @@
             </div>
 
             <div>
-                <input type="text" th:field="*{description}" />
+                Description: <input type="text" th:field="*{description}" />
                     <ul>
                         <li th:each="err : ${#fields.errors('description')}" th:text="${err}"/>
                     </ul>
-                <input type="text" th:field="*{prepTime}" />
+                Prepare Time: <input type="text" th:field="*{prepTime}" />
                     <ul>
                         <li th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"/>
                     </ul>
-                <input type="text" th:field="*{cookTime}" />
+                Cooking Time: <input type="text" th:field="*{cookTime}" />
                     <ul>
                         <li th:each="err : ${#fields.errors('cookTime')}" th:text="${err}"/>
                     </ul>
-                <input type="text" th:field="*{servings}" />
+                Servings: <input type="text" th:field="*{servings}" />
                     <ul>
                         <li th:each="err : ${#fields.errors('servings')}" th:text="${err}"/>
                     </ul>
-                <input type="text" th:field="*{source}" />
-                <input type="text" th:field="*{directions}" />
+                Source: <input type="text" th:field="*{source}" />
+                    <ul>
+                        <li th:each="err : ${#fields.errors('source')}" th:text="${err}"/>
+                    </ul>
+                Directions: <input type="text" th:field="*{directions}" />
                     <ul>
                         <li th:each="err : ${#fields.errors('directions')}" th:text="${err}"/>
                     </ul>

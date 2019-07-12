@@ -12,7 +12,6 @@ import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeServ
 
 import javax.validation.Valid;
 
-
 @Controller
 public class recipeController {
 
