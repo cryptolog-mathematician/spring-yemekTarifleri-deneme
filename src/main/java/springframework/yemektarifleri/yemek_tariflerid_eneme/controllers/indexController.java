@@ -2,8 +2,9 @@ package springframework.yemektarifleri.yemek_tariflerid_eneme.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeService;
+
 
 
 @Controller
@@ -16,11 +17,10 @@ public class indexController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({"", "/", "/recipes"})
-    public String getAllRecipe(Model model){
-        //log.debug("Getting recipeHome page");
-
+    @GetMapping({"", "/", "/recipes"})
+    public String getRecipes(Model model){
         model.addAttribute("recipes", recipeService.findAll());
         return "recipies/recipeHome";
     }
+
 }
