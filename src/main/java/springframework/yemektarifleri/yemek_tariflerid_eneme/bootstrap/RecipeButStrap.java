@@ -18,13 +18,14 @@ public class RecipeButStrap implements ApplicationListener<ContextRefreshedEvent
     private final RecipeRepository recipeRepository;
 
     public RecipeButStrap(RecipeRepository recipeRepository) {
+
         this.recipeRepository = recipeRepository;
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        recipeRepository.saveAll(getRecipes());
+        //recipeRepository.saveAll(getRecipes());
        // log.debug("Loading Bootstrap Data");
     }
 

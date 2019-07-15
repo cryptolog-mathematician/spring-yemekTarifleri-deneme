@@ -43,7 +43,7 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingradient> ingradients;
 
-    @Lob
+    @Lob   //LArge Oject
     private Byte[] imege;
 
     @OneToOne(cascade = CascadeType.ALL)
