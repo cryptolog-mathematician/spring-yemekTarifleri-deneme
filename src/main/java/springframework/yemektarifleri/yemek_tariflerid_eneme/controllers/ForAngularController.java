@@ -29,5 +29,31 @@ public class ForAngularController {
         return recipeService.findAll();
     }
 
+    @GetMapping(value = {"/{id}"}, produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public Recipe getRecipeById(@PathVariable Long id){
 
+        return recipeService.findById(id);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Recipe updateRecipe(@RequestBody Recipe recipe){
+
+        return recipeService.save(recipe);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Recipe createRecipe(@RequestBody Recipe recipe){
+
+        return recipeService.save(recipe);
+    }
+
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteToDo(@PathVariable Long id){
+
+        recipeService.deletById(id);
+    }
 }
