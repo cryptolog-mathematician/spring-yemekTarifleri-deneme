@@ -8,9 +8,9 @@ import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeServ
 
 import java.util.Set;
 
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/recipeAll")
+@RequestMapping(value ="/recipeAll", produces = "application/json")
 //@Controller
 public class ForAngularController {
 
