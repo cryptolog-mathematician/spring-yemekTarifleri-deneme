@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.model.RecipeDTO;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.exceptions.NotFoundException;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeService;
@@ -24,7 +25,7 @@ public class recipeController {
 
     @GetMapping("/recipe/{id}/recipeDetail")
     public String getRecipeDetail(@PathVariable String id, Model model) {
-        Recipe recipe = this.recipeService.findById(new Long(id));
+        RecipeDTO recipe = this.recipeService.findById(new Long(id));
         model.addAttribute(recipe);
         return "recipies/recipeDetail";
     }
@@ -43,13 +44,13 @@ public class recipeController {
     }
 
     @PostMapping("recipe")
-    public String saveOrUpdate(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult result){
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeDTO recipe, BindingResult result){
 
         if (result.hasErrors()){
             return "recipies/recipeUpdateAndCreate";
         }
 
-        Recipe savedRecipe = recipeService.save(recipe);
+        RecipeDTO savedRecipe = recipeService.save(recipe);
 
         return "redirect:/recipe/" + savedRecipe.getId() + "/recipeDetail";
     }

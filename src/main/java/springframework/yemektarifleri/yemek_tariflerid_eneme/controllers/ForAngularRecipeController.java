@@ -1,9 +1,8 @@
 package springframework.yemektarifleri.yemek_tariflerid_eneme.controllers;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe;
+import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.model.RecipeDTO;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.services.RecipeService;
 
 import java.util.Set;
@@ -11,12 +10,11 @@ import java.util.Set;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value ="/recipeAll", produces = "application/json")
-//@Controller
-public class ForAngularController {
+public class ForAngularRecipeController {
 
     private final RecipeService recipeService;
 
-    public ForAngularController(RecipeService recipeService) {
+    public ForAngularRecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
@@ -24,28 +22,28 @@ public class ForAngularController {
     //@RequestMapping(value = "/recipesAll", method = RequestMethod.GET, produces = "application/json")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Set<Recipe> getAllRecipe(){
+    public Set<RecipeDTO> getAllRecipe(){
 
         return recipeService.findAll();
     }
 
-    @GetMapping(value = {"/{id}"}, produces = "application/json")
+    @GetMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
-    public Recipe getRecipeById(@PathVariable Long id){
+    public RecipeDTO getRecipeById(@PathVariable Long id){
 
         return recipeService.findById(id);
     }
 
-    @PutMapping
+    @PutMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
-    public Recipe updateRecipe(@RequestBody Recipe recipe){
+    public RecipeDTO updateRecipe(@RequestBody RecipeDTO recipe, @PathVariable Long id){
 
-        return recipeService.save(recipe);
+        return recipeService.saveRecipe(recipe, id);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Recipe createRecipe(@RequestBody Recipe recipe){
+    @ResponseStatus(HttpStatus.OK)
+    public RecipeDTO createRecipe(@RequestBody RecipeDTO recipe){
 
         return recipeService.save(recipe);
     }

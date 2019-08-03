@@ -1,5 +1,6 @@
 package springframework.yemektarifleri.yemek_tariflerid_eneme.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 

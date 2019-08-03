@@ -39,7 +39,11 @@
                     <ul>
                         <li th:each="err : ${#fields.errors('directions')}" th:text="${err}"/>
                     </ul>
-                <!-- img note and ingredients should be added -->
+                Notes: <input type="text" th:field="*{notes.recipeNotes}" />
+                <ul>
+                    <li th:each="err : ${#fields.errors('notes')}" th:text="${err}"/>
+                </ul>
+                <!-- img and ingredients should be added -->
             </div>
             <div>
                 <button type="submit">Submit</button>
