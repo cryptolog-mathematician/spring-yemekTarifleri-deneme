@@ -25,7 +25,7 @@ public class RecipeDTO {
     private String directions;
 
     private Set<Ingradient> ingradients;
-    private Byte[] imege;
+    private byte[] imege;
     private Notes notes;
 
     private Set<Category> categories;

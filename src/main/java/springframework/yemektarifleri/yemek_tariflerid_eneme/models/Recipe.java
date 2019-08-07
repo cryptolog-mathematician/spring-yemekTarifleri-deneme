@@ -41,7 +41,7 @@ public class Recipe {
     private Set<Ingradient> ingradients;
 
     @Lob   //Large Object
-    private Byte[] imege;
+    private byte[] imege;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;

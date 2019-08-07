@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.mapper.RecipeMapper;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.model.RecipeDTO;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.exceptions.NotFoundException;
-import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Notes;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.repositories.RecipeRepository;
 
