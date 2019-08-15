@@ -1,7 +1,9 @@
 package springframework.yemektarifleri.yemek_tariflerid_eneme.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.model.RecipeDTO;
@@ -13,9 +15,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Slf4j
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/imag")
 public class ImageController {
 
     private final RecipeService recipeService;
@@ -42,5 +45,6 @@ public class ImageController {
         response.setContentType("image/jpeg");
         InputStream in = new ByteArrayInputStream(byteArray);
         IOUtils.copy(in, response.getOutputStream());
+        log.debug("file is: ", response);
     }
 }

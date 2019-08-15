@@ -18,8 +18,6 @@ public class ForAngularRecipeController {
         this.recipeService = recipeService;
     }
 
-
-    //@RequestMapping(value = "/recipesAll", method = RequestMethod.GET, produces = "application/json")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Set<RecipeDTO> getAllRecipe(){

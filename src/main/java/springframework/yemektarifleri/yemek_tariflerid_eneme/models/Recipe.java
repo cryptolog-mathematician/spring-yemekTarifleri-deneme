@@ -35,8 +35,10 @@ public class Recipe {
     private String source;
 
     //@NotBlank
+    @Lob
     private String directions;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingradient> ingradients;
 
