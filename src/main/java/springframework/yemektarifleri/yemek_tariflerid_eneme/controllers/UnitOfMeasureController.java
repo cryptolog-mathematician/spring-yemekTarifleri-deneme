@@ -18,6 +18,12 @@ public class UnitOfMeasureController {
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UnitOfMeasureDTO getUomById(@PathVariable Long id) {
+        return unitOfMeasureService.findById(id);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Set<UnitOfMeasureDTO> getAllUOM() {

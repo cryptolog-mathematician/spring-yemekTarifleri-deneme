@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.mapper.RecipeMapper;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.model.RecipeDTO;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.exceptions.NotFoundException;
+import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Ingradient;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.models.Recipe;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.repositories.RecipeRepository;
 
@@ -48,9 +49,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeDTO save(RecipeDTO object) {
-        Recipe recipe = recipeRepository.save(recipeMapper.recipeDTO2recipe(object));
+        Recipe recipe = recipeMapper.recipeDTO2recipe(object);
 
-        RecipeDTO recipeDTO= recipeMapper.recipe2recipeDTO(recipe);
+        for (Ingradient ing: recipe.getIngradients()) {
+            recipe.addIngradient(ing);
+        }
+        Recipe recipeSaved = recipeRepository.save(recipe);
+
+        RecipeDTO recipeDTO= recipeMapper.recipe2recipeDTO(recipeSaved);
         return recipeDTO;
     }
 
