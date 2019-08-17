@@ -1,5 +1,6 @@
 package springframework.yemektarifleri.yemek_tariflerid_eneme.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.mapper.RecipeMapper;
 import springframework.yemektarifleri.yemek_tariflerid_eneme.api.v1.model.RecipeDTO;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
@@ -51,8 +53,8 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeDTO save(RecipeDTO object) {
         Recipe recipe = recipeMapper.recipeDTO2recipe(object);
 
-        for (Ingradient ing: recipe.getIngradients()) {
-            recipe.addIngradient(ing);
+        for (Ingradient ingrad: recipe.getIngradients()) {
+            recipe.addIngradient(ingrad);
         }
         Recipe recipeSaved = recipeRepository.save(recipe);
 
@@ -62,9 +64,26 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeDTO saveRecipe(RecipeDTO obj, Long id) {
-        Recipe recipe = recipeRepository.save(recipeMapper.recipeDTO2recipe(obj));
-        recipe.setId(id); //gereksiz bu aslinda
-        RecipeDTO recipeDTO= recipeMapper.recipe2recipeDTO(recipe);
+        Recipe recipe = recipeRepository.findById(id).get();
+
+        if (recipe.getId() != null){
+            for (Ingradient ingrad: obj.getIngradients()) {
+                if (ingrad.getId() != null) {
+                    for (Ingradient ingradient: recipe.getIngradients()) {
+                        if (ingrad.getId().equals(ingradient.getId())) {
+                            ingradient.setAmount(ingrad.getAmount());
+                            ingradient.setUom(ingrad.getUom());
+                            ingradient.setDescription(ingrad.getDescription());
+                            break;
+                        }
+                    }
+                }else {
+                    recipe.addIngradient(ingrad);
+                }
+            }
+        }
+
+        RecipeDTO recipeDTO= recipeMapper.recipe2recipeDTO(recipeRepository.save(recipe));
         return recipeDTO;
     }
 

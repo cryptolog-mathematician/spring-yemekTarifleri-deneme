@@ -19,12 +19,12 @@ import java.io.InputStream;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/imag")
-public class ImageController {
+public class ForAngularImageController {
 
     private final RecipeService recipeService;
     private final ImageServiceImpl imageService;
 
-    public ImageController(RecipeService recipeService, ImageServiceImpl imageService) {
+    public ForAngularImageController(RecipeService recipeService, ImageServiceImpl imageService) {
         this.recipeService = recipeService;
         this.imageService = imageService;
     }

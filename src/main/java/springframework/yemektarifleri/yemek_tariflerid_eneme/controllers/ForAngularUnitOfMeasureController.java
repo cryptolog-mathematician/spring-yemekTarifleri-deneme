@@ -10,11 +10,11 @@ import java.util.Set;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/unitOfMeasure", produces = "application/json")
-public class UnitOfMeasureController {
+public class ForAngularUnitOfMeasureController {
 
     private UnitOfMeasureServiceImpl unitOfMeasureService;
 
-    public UnitOfMeasureController(UnitOfMeasureServiceImpl unitOfMeasureService) {
+    public ForAngularUnitOfMeasureController(UnitOfMeasureServiceImpl unitOfMeasureService) {
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
